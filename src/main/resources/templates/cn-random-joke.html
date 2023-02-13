@@ -13,8 +13,8 @@
 		<div class="col-6 mx-auto text-center mt-5 mb-5">
 			<div
 				x-data="{ 
-                        cnApiRandomJoke: 'https://api.chucknorris.io/jokes/random',
                         joke: '',
+                        cnApiRandomJoke:'https://api.chucknorris.io/jokes/random',
                         async getJoke() {
                             let response = await fetch(this.cnApiRandomJoke);
                             let jokes = await response.json();
