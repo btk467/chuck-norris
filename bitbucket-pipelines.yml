@@ -25,3 +25,9 @@ pipelines:
             # Run a security scan for sensitive data.
             # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
             - pipe: atlassian/git-secrets-scan:0.5.1
+      - step:
+          name: Deploy to test
+          deployment: test
+          # trigger: manual  # Uncomment to make this a manual deployment.
+          script:
+            - echo "Deploying to test environment"
