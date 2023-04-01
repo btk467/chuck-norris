@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ChuckNorrisApplication<chuck-norris>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "org.btk467.cnjokes.ChuckNorrisApplication",
+            "projectName": "chuck-norris",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
