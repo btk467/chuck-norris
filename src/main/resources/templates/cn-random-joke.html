@@ -9,24 +9,29 @@
 </head>
 <body>
 	<div class="container">
-		<row>
-		<div class="col-6 mx-auto text-center mt-5 mb-5">
+		<row><div class="col-6 mx-auto text-center mt-5 mb-5">
 			<div
 				x-data="{ 
                         joke: '',
-                        cnApiRandomJoke:'https://api.chucknorris.io/jokes/random',
                         async getJoke() {
-                            let response = await fetch(this.cnApiRandomJoke);
+							console.log($store.data.cnApiRandomJokeUrl);
+                            let response = await fetch($store.data.cnApiRandomJokeUrl);
                             let jokes = await response.json();
                             this.joke = jokes['value'];
                         }
                     }">
-				<button class="btn btn-primary mb-5" x-on:click.prevent="getJoke">Get a Joke</button>
+				<button class="btn btn-primary mb-5" x-on:click.prevent="getJoke">Get Next Joke</button>
 				<div x-transition x-text="joke"></div>
-
 			</div>
-		</div>
-		</row>
+		</div></row>
 	</div>
+
+	<script th:inline="javascript">
+    	document.addEventListener('alpine:init', () => {
+    		Alpine.store('data', {
+    			cnApiRandomJokeUrl: [[${cnRandomJokeUrl}]],
+        	})
+    	})	
+	</script>	
 </body>
 </html>

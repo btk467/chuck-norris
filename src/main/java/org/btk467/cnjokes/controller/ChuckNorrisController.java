@@ -34,14 +34,14 @@ public class ChuckNorrisController {
 //    headers.add("user-agent", "Application");
 //    HttpEntity<String> entity = new HttpEntity<>(headers);
 
-    try {
-      throw new Exception("This is a test.");
-    } catch (Exception e) {
-      Sentry.captureException(e);
-    }
+//    try {
+//      throw new Exception("This is a test.");
+//    } catch (Exception e) {
+//      Sentry.captureException(e);
+//    }
     
     log.info("endpoint " + RANDOM_JOKE_URL );
-    model.addAttribute("cn-random-joke-url", RANDOM_JOKE_URL);
+    model.addAttribute("cnRandomJokeUrl", RANDOM_JOKE_URL);
     return "cn-random-joke";
   }
 }
