@@ -12,7 +12,7 @@
 		<row><div class="col-6 mx-auto text-center mt-5 mb-5">
 			<div
 				x-data="{ 
-                        joke: '',
+                        joke: 'Click on Get Joke Button ...',
                         async getJoke() {
 							console.log($store.data.cnApiRandomJokeUrl);
                             let response = await fetch($store.data.cnApiRandomJokeUrl);
