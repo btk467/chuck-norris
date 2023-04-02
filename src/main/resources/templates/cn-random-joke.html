@@ -14,7 +14,7 @@
 			<p>This is 'One Click' deploy pipeline from Victor desktop to Railways Cloud platform test ... </p>
 			</row>
 			<row>
-			<button class="btn btn-primary mb-5" x-on:click.prevent="$store.data.getJoke1()">Get Joke</button>
+			<button class="btn btn-primary mb-5" x-on:click.prevent="$store.data.getJoke()">Get Joke</button>
 			</row>
 			<row>
 			<div x-transition x-text="$store.data.joke"></div>
@@ -27,11 +27,11 @@
     		Alpine.store('data', {
     			cnApiRandomJokeUrl: [[${cnRandomJokeUrl}]],
     			joke: 'Click on Get Joke Button ...',
-                async getJoke1() {
+                async getJoke() {
                 	let response = await fetch(this.cnApiRandomJokeUrl);
                     let jokes = await response.json();
                     this.joke = jokes['value'];
-    			}
+    			},
         	})
     	})	
 	</script>	
