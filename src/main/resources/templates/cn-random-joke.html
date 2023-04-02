@@ -8,28 +8,27 @@
 <link th:href="@{/css/bootstrap.min.css}" href="../static/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-	<div class="container">
-		<row><div class="col-6 mx-auto text-center mt-5 mb-5">
-			<div
-				x-data="{ 
-                        joke: 'Click on Get Joke Button ...',
-                        async getJoke() {
-							console.log($store.data.cnApiRandomJokeUrl);
-                            let response = await fetch($store.data.cnApiRandomJokeUrl);
-                            let jokes = await response.json();
-                            this.joke = jokes['value'];
-                        }
-                    }">
-				<button class="btn btn-primary mb-5" x-on:click.prevent="getJoke">Get Joke</button>
-				<div x-transition x-text="joke"></div>
-			</div>
-		</div></row>
+	<div class="container" x-data>		    
+		<div class="col-6 mx-auto text-center mt-5 mb-5">
+			<row>
+			<button class="btn btn-primary mb-5" x-on:click.prevent="$store.data.getJoke1()">Get Joke</button>
+			</row>
+			<row>
+			<div x-transition x-text="$store.data.joke"></div>
+			</row>
+		</div>
 	</div>
 
 	<script th:inline="javascript">
     	document.addEventListener('alpine:init', () => {
     		Alpine.store('data', {
     			cnApiRandomJokeUrl: [[${cnRandomJokeUrl}]],
+    			joke: 'Click on Get Joke Button ...',
+                async getJoke1() {
+                	let response = await fetch(this.cnApiRandomJokeUrl);
+                    let jokes = await response.json();
+                    this.joke = jokes['value'];
+    			}
         	})
     	})	
 	</script>	
