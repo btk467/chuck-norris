@@ -16,11 +16,8 @@ pipelines:
           # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
           - pipe: atlassian/git-secrets-scan:0.5.1
     - step:
-        name: Sync GitHub Mirror
-        image: alpine/git:latest
         clone:
-          enabled: false
+          enabled: true
         script:
-          - apt install -y git
           - git remote add gh https://github.com/btk467/chuck-norris.git
           - git push gh 
