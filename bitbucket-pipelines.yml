@@ -21,5 +21,6 @@ pipelines:
         clone:
           enabled: false
         script:
+          - apt install -y git
           - git remote add gh https://github.com/btk467/chuck-norris.git
           - git push gh 
