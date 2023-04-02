@@ -19,5 +19,5 @@ pipelines:
         clone:
           enabled: true
         script:
-          - git remote add gh https://github.com/btk467/chuck-norris.git
+          - git remote add gh git@github.com:btk467/chuck-norris.git
           - git push gh 
