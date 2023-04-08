@@ -9,23 +9,26 @@ image: maven:3.6.3
 
 pipelines:
   default:
-    - step:
-        name: Sonar the code
-        clone:
-          enabled: true
-        script:
-          - mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=btk467_victor-s-organization  
+    clone:
+      enabled: true
   branches:
     branches:
-      '{master}':
+      '{master}': # this step will be done only when master branch is pushed
         - step:
-          name: Security Scan
-          script:
-            # Run a security scan for sensitive data.
-            # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
-            - pipe: atlassian/git-secrets-scan:0.5.1
-        - step:
-          name: Pushing Github 
+          name: Sync with Github repository 
           script:
             - git remote add gh git@github.com:btk467/chuck-norris.git
-            - git push gh 
+            - git push gh
+      develop:
+        - parallel:      # these 2 steps will run in parallel             
+          - step:
+            name: Security Scan
+            script:
+              # Run a security scan for sensitive data.
+              # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
+              - pipe: atlassian/git-secrets-scan:0.5.1
+          - step:
+            name: Sonar the code
+            script:
+              - mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=btk467_victor-s-organization  
+      
