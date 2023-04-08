@@ -16,6 +16,12 @@ pipelines:
           # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
           - pipe: atlassian/git-secrets-scan:0.5.1
     - step:
+        name: Sonar the code
+        clone:
+          enabled: true
+        script:
+          - mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=btk467_victor-s-organization  
+    - step:
         name: Pushing Github 
         clone:
           enabled: true
