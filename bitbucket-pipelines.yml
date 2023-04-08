@@ -8,19 +8,18 @@
 image: maven:3.6.3
 
 pipelines:
-  default:
-    clone:
-      enabled: true
   branches:
-    branches:
-      '{master}': # this step will be done only when master branch is pushed
-        - step:
-          name: Sync with Github repository 
-          script:
-            - git remote add gh git@github.com:btk467/chuck-norris.git
-            - git push gh
-      develop:
-        - parallel:      # these 2 steps will run in parallel             
+    '{master}': # this step will be done only when master branch is pushed
+      - step:
+        clone:
+          enabled: true
+        name: Sync with Github repository 
+        script:
+          - git remote add gh git@github.com:btk467/chuck-norris.git
+          - git push gh
+    develop:
+      - parallel:      # these 2 steps will run in parallel    
+        - steps:         
           - step:
             name: Security Scan
             script:
