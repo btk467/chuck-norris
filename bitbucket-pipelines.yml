@@ -1,6 +1,6 @@
 pipelines:
   branches:
-    '{master}':
+    master:
       - step:
           script:
             - echo "master"
