@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Chuck Norris | Random Jokes</title>
 <script defer th:src="@{/js/alpine-3.10.5.min.js}" src="../static/js/alpine-3.10.5.min.js"></script>
+<script
+  src="https://browser.sentry-cdn.com/7.47.0/bundle.min.js"
+  integrity="sha384-GKT6T43bg4L3ymiK0JLBjIrUnu2sJPDAngs6/WEEADaDYlCx/fq4MSCl42UC3n8O"
+  crossorigin="anonymous">
+  </script>
 <link th:href="@{/css/bootstrap.min.css}" href="../static/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -18,6 +23,12 @@
 			</row>
 			<row>
 			<div x-transition x-text="$store.data.joke"></div>
+			</row>
+			<row>
+			<button class="btn btn-danger mb-5" x-on:click.prevent="crashAndReportError()">Report error</button>
+			</row>
+			<row>
+			<button class="btn btn-danger mb-5" x-on:click.prevent="crashTheWorld()">Throw unhandled exception</button>
 			</row>
 		</div>
 	</div>
@@ -33,7 +44,26 @@
                     this.joke = jokes['value'];
     			},
         	})
-    	})	
+    	});	
+    	
+    	Sentry.init({
+            dsn: "https://af90203206ae4026b73f7f8d92106837@o335612.ingest.sentry.io/1866341",
+            beforeSend(event, hint) {
+                if (event.exception) {
+                    Sentry.showReportDialog({ eventId: event.event_id });
+                }
+                return event;
+            }
+        });
+    	
+        console.log("Sentry initialized")
+        Sentry.captureMessage("Initialized Sentry", "info");
+
+        function crashAndReportError() {
+            console.log('crashAndReportError');
+            Sentry.captureException(new Error('Congrats, you broke it'));
+            Sentry.showReportDialog({ })
+        }
 	</script>	
 </body>
 </html>
