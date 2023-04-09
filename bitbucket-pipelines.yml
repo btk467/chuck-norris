@@ -32,5 +32,5 @@ pipelines:
                   - echo $BITBUCKET_CLONE_DIR 
                   - pipe: sonarsource/sonarcloud-scan:1.4.0
                     variables:
-                      EXTRA_ARGS: '-Dsonar.organization=wcb-of-manitoba -Dsonar.projectKey=wcb-mb -Dsonar.host.url=https://sonarcloud.io'
+                      EXTRA_ARGS: '-Dsonar.organization=wcb-of-manitoba -Dsonar.projectKey=wcb-mb -Dsonar.host.url=https://sonarcloud.io -Dsonar.java.source=1.8'
                       
