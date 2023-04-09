@@ -11,12 +11,16 @@ pipelines:
   branches:
     master: # this step will be done only when master branch is pushed
       - step:
+          caches:
+            - maven
           name: Security Scan
           script:
             # Run a security scan for sensitive data.
             # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
             - pipe: atlassian/git-secrets-scan:0.5.1
       - step:
+          caches:
+            - maven
           clone:
             enabled: true
           name: Sync with Github repository 
