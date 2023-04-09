@@ -31,4 +31,5 @@ pipelines:
                 script:
                   - pipe: sonarsource/sonarcloud-scan:1.4.0
                     variables:
-                      EXTRA_ARGS: '-Dsonar.projectKey=wcb-mb -Dsonar.organization=wcb-of-manitoba -Dsonar.java.source=1.8 -Dsonar.java.binaries=.'                  
+                      EXTRA_ARGS: '-Dsonar.organization=wcb-of-manitoba -Dsonar.projectKey=wcb-mb -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io'
+                      
