@@ -11,26 +11,16 @@ pipelines:
   branches:
     master: # this step will be done only when master branch is pushed
       - step:
+          name: Security Scan
+          script:
+            # Run a security scan for sensitive data.
+            # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
+            - pipe: atlassian/git-secrets-scan:0.5.1
+      - step:
           clone:
             enabled: true
           name: Sync with Github repository 
           script:
             - git remote add gh git@github.com:btk467/chuck-norris.git
             - git push gh
-    develop:
-      - parallel:      # these 2 steps will run in parallel    
-          steps:         
-            - step:
-                name: Security Scan
-                script:
-                  # Run a security scan for sensitive data.
-                  # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
-                  - pipe: atlassian/git-secrets-scan:0.5.1
-#Will have to wait for java 11
-#            - step:
-#                name: Sonar the code
-#                script:
-#                  - pipe: sonarsource/sonarcloud-scan:1.4.0
-#                    variables:
-#                      EXTRA_ARGS: '-Dsonar.organization=wcb-of-manitoba -Dsonar.projectKey=wcb-mb -Dsonar.host.url=https://sonarcloud.io -Dsonar.java.source=11'
                       
