@@ -29,8 +29,6 @@ pipelines:
             - step:
                 name: Sonar the code
                 script:
-#                  #- mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=btk467_victor-s-organization
-#                  #- pipe: sonarsource/sonarcloud-quality-gate:0.1.6
                   - pipe: sonarsource/sonarcloud-scan:1.4.0
                     variables:
                       EXTRA_ARGS: '-Dsonar.projectKey=wcb-mb -Dsonar.organization=wcb-of-manitoba -Dsonar.java.source=1.8 -Dsonar.java.binaries=.'                  
