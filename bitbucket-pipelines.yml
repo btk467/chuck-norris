@@ -26,6 +26,7 @@ pipelines:
                   # Run a security scan for sensitive data.
                   # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
                   - pipe: atlassian/git-secrets-scan:0.5.1
+<<<<<<< HEAD
 #            - step:
 # requires Java 11 and up. Commenting ...
 #                name: Sonar the code
@@ -35,3 +36,11 @@ pipelines:
 #                  - pipe: sonarsource/sonarcloud-scan:1.4.0
 #                    variables:
 #                      EXTRA_ARGS: '-Dsonar.projectKey=btk467_victor-s-organization -Dsonar.organization=btk467 -Dsonar.java.source=11'                  
+=======
+#Requires Java 11 at min. will have to upgrade Java 1st.
+#            - step:
+#                name: Sonar the code
+#                script:
+#                  - mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=btk467_victor-s-organization
+                  
+>>>>>>> branch 'develop' of https://vscurtu@bitbucket.org/wcbmb/chuck-norris.git
