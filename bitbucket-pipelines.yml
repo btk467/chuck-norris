@@ -33,4 +33,4 @@ pipelines:
 #                  #- pipe: sonarsource/sonarcloud-quality-gate:0.1.6
                   - pipe: sonarsource/sonarcloud-scan:1.4.0
                     variables:
-                      EXTRA_ARGS: '-Dsonar.projectKey=wcb-mb -Dsonar.organization=wcb-of-manitoba -Dsonar.java.source=1.8'                  
+                      EXTRA_ARGS: '-Dsonar.projectKey=wcb-mb -Dsonar.organization=wcb-of-manitoba -Dsonar.java.source=1.8 -Dsonar.java.binaries=**/*.java'                  
