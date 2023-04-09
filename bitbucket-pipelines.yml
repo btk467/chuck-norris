@@ -17,7 +17,7 @@ pipelines:
           script:
             - git remote add gh git@github.com:btk467/chuck-norris.git
             - git push gh
-    default:
+    develop:
       - parallel:      # these 2 steps will run in parallel    
           steps:         
             - step:
