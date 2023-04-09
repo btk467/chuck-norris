@@ -26,8 +26,9 @@ pipelines:
                   # Run a security scan for sensitive data.
                   # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
                   - pipe: atlassian/git-secrets-scan:0.5.1
-            - step:
-                name: Sonar the code
-                script:
-                  - mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=btk467_victor-s-organization
+#Requires Java 11 at min. will have to upgrade Java 1st.
+#            - step:
+#                name: Sonar the code
+#                script:
+#                  - mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=btk467_victor-s-organization
                   
