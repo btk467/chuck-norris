@@ -17,9 +17,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<spring-cloud.version>2021.0.5</spring-cloud.version>
-		<sonar.organization>btk467</sonar.organization>
-		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+		<!-- <spring-cloud.version>2021.0.5</spring-cloud.version> -->
 	</properties>
 
 	<dependencies>
@@ -81,10 +79,11 @@
 		<!-- <groupId>org.springframework.cloud</groupId> -->
 		<!-- <artifactId>spring-cloud-starter-gateway</artifactId> -->
 		<!-- </dependency> -->
+		<!-- https://mvnrepository.com/artifact/io.sentry/sentry-spring-boot-starter -->
 		<dependency>
 			<groupId>io.sentry</groupId>
-			<artifactId>sentry</artifactId>
-			<version>6.15.0</version>
+			<artifactId>sentry-spring-boot-starter</artifactId>
+			<version>6.17.0</version>
 		</dependency>
 	</dependencies>
 
@@ -116,4 +115,13 @@
 	<!-- </dependency> -->
 	<!-- </dependencies> -->
 	<!-- </dependencyManagement> -->
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>a0rkgaij9bpai-artifactory-primary-0-snapshots</name>
+			<url>https://wcbmb.jfrog.io/artifactory/libs-snapshot</url>
+		</snapshotRepository>
+	</distributionManagement>
+
 </project>
