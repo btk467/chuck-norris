@@ -44,12 +44,12 @@ public class ChuckNorrisController {
 
   @GetMapping(value = {"/crash"})
   public String crash() {
-    List<String> strings = Arrays.asList("a1", "a2", "b1", "c2", "c1");
 
+    //this code should crash and send error to Sentry cloud service
+    List<String> strings = Arrays.asList("a1", "a2", "b1", "c2", "c1");
     Stream<String> pipeline = strings.stream().filter(b -> b.contains("2"));
     long count1 = pipeline.count();
     long count2 = pipeline.mapToLong(b -> b.length()).sum(); // Non-compliant;
-
     System.out.println(String.format("Counts: %l %l", count1, count2));
 
     return "cn-random-joke";
