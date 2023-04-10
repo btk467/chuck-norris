@@ -8,6 +8,7 @@ public class ChuckNorrisApplication {
 
 	public static void main(String[] args) {
 
+//	Sentry.init();  
 //	  Sentry.init(options -> {
 //	    options.setDsn("https://af90203206ae4026b73f7f8d92106837@o335612.ingest.sentry.io/1866341");
 //	    // Set tracesSampleRate to 1.0 to capture 100% of transactions for performance monitoring.

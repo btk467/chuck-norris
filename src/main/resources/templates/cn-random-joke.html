@@ -46,8 +46,8 @@
         	})
     	});	
     	
-    	Sentry.init({
-            dsn: "https://af90203206ae4026b73f7f8d92106837@o335612.ingest.sentry.io/1866341",
+		Sentry.init({
+            dsn: [[${@environment.getProperty('sentry.dsn')}]],
             beforeSend(event, hint) {
                 if (event.exception) {
                     Sentry.showReportDialog({ eventId: event.event_id });
@@ -56,7 +56,6 @@
             }
         });
     	
-        console.log("Sentry initialized")
         Sentry.captureMessage("Initialized Sentry", "info");
 
         function crashAndReportError() {
