@@ -11,15 +11,25 @@ pipelines:
   branches:
     master: # this step will be done only when master branch is pushed
       - step:
-          name: Security Scan
-          script:
-            # Run a security scan for sensitive data.
-            # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
-            - pipe: atlassian/git-secrets-scan:0.5.1
-      - step:
           clone:
             enabled: true
           name: Sync with Github repository 
           script:
             - git remote add gh git@github.com:btk467/chuck-norris.git
             - git push gh
+    develop:
+      - parallel:      # these 2 steps will run in parallel    
+          steps:         
+            - step:
+                name: Security Scan
+                caches:
+                  - maven
+                script:
+                  # Run a security scan for sensitive data.
+                  # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
+                  - pipe: atlassian/git-secrets-scan:0.5.1
+#Requires Java 11 at min. will have to upgrade Java 1st.
+#            - step:
+#                name: Sonar the code
+#                script:
+#                  - mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=btk467_victor-s-organization
