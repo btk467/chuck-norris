@@ -6,17 +6,30 @@ package org.btk467.cnjokes.config;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
 
 /**
- * TODO
  * @author Victor
  */
 @Configuration
 public class ChuckNorrisConfig {
 
+  public static final String RANDOM_JOKE_URL = "https://api.chucknorris.io/jokes/random";
+
   @Bean
-  public RestTemplate restTemplate(RestTemplateBuilder builder) {
+  RestTemplate restTemplate(RestTemplateBuilder builder) {
       return builder.build();
   }
+  
+  @Bean
+  HttpHeaders proxyHttpHeaders() {
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+    headers.add("User-Agent", "Chrome/58.0.3029.110");
+    
+    return headers;
+  }
+
 }

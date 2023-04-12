@@ -16,13 +16,13 @@
 	<div class="container" x-data>		    
 		<div class="col-6 mx-auto text-center mt-5 mb-5">
 			<row>
-			<p>This is 'One Click' deploy pipeline from Victor desktop to Railways Cloud platform test ... </p>
+			<p>This is 'One Click' deploy pipeline from Victor desktop to <br>Railways Cloud platform test ... </p>
 			</row>
 			<row>
-			<button class="btn btn-primary mb-5" x-on:click.prevent="$store.data.getJoke()">Get Joke</button>
+			<button class="btn btn-primary mb-5" x-on:click.prevent="$store.data.getJoke()">Get Directly</button>
 			</row>
 			<row>
-			<div x-transition x-text="$store.data.joke"></div>
+			<button class="btn btn-primary mb-5" x-on:click.prevent="$store.data.getJokeViaProxy()">Get Via Proxy</button>
 			</row>
 			<row>
 			<button class="btn btn-danger mb-5" x-on:click.prevent="crashAndReportError()">Report error</button>
@@ -30,17 +30,28 @@
 			<row>
 			<button class="btn btn-danger mb-5" x-on:click.prevent="crashTheWorld()">Throw unhandled exception</button>
 			</row>
+			<row>
+			<div x-transition x-text="$store.data.joke"></div>
+			</row>
 		</div>
 	</div>
 
 	<script th:inline="javascript">
     	document.addEventListener('alpine:init', () => {
     		Alpine.store('data', {
+    			proxyUrl: '/api/randomJoke',
     			cnApiRandomJokeUrl: [[${cnRandomJokeUrl}]],
-    			joke: 'Click on Get Joke Button ...',
+    			joke: '',
+                async getJokeViaProxy() {
+                	let response = await fetch(this.proxyUrl);
+                    let jokes = await response.json();
+                    console.log(jokes);
+                    this.joke = jokes['value'];
+    			},
                 async getJoke() {
                 	let response = await fetch(this.cnApiRandomJokeUrl);
                     let jokes = await response.json();
+                    console.log(jokes);
                     this.joke = jokes['value'];
     			},
         	})
@@ -56,12 +67,12 @@
             }
         });
     	
-        Sentry.captureMessage("Initialized Sentry", "info");
+        //Sentry.captureMessage("Initialized Sentry", "info");
 
         function crashAndReportError() {
-            console.log('crashAndReportError');
-            Sentry.captureException(new Error('Congrats, you broke it'));
-            Sentry.showReportDialog({ })
+        	var errorEvent = new Error('Congrats, you broke it');
+        	Sentry.captureException(errorEvent);
+            Sentry.showReportDialog({ eventId: errorEvent.event_id })
         }
 	</script>	
 </body>
