@@ -1,6 +1,3 @@
-server:
-  port: 8081
-  
 sentry:
   dsn: "https://af90203206ae4026b73f7f8d92106837@o335612.ingest.sentry.io/1866341"
   traces-sample-rate: 1.0
